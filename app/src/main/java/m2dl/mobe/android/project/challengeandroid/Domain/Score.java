@@ -13,7 +13,8 @@ public class Score {
     private List<Integer> points = new ArrayList<>();
 
     public Score() {
-
+        addPoint(400);
+        addPoint(300);
     }
 
     public void sortList(List<Integer> list) {
