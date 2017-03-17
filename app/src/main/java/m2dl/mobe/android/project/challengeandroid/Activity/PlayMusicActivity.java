@@ -29,8 +29,8 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
     private float mScreenHeight;
     public static Score score = new Score();
     private Random randomFreq;
-    int max = 800;
-    int min = 500;
+    int max = 1000;
+    int min = 300;
     int rand;
     private Handler mHandler;
     private CreateImage buttonCreater;
