@@ -31,6 +31,7 @@ public class PlayMusicActivity extends AppCompatActivity {
     private CreateImage buttonCreater;
     private RelativeLayout relativeLayout;
     public MediaPlayer playSound1,playSound2,playSound3,playSound4,playSound5;
+    private  int frenqueShake = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +48,7 @@ public class PlayMusicActivity extends AppCompatActivity {
 
         mHandler = new Handler();
         mHandler.postDelayed(mUpdateTimeTask,rand);
+
         if (extras != null) {
             songNb = extras.getInt("song");
         }
@@ -83,42 +85,60 @@ public class PlayMusicActivity extends AppCompatActivity {
     }
 
     private Runnable mUpdateTimeTask = new Runnable() {
+
         @Override
         public void run() {
 
-            Random randomNumber = new Random();
-            int rand = randomNumber.nextInt(5);
-
-            switch (rand) {
-                case 1:
-                    playSound1.start();
-                    ImageView img = buttonCreater.createRandomButton();
-                    relativeLayout.addView(img);
-                    break;
-                case 2:
-                    playSound2.start();
-                    ImageView img2 = buttonCreater.createRandomButton();
-                    relativeLayout.addView(img2);
-                    break;
-                case 3:
-                    playSound3.start();
-                    ImageView img3 = buttonCreater.createRandomButton();
-                    relativeLayout.addView(img3);
-                    break;
-                case 4:
-                    playSound4.start();
-                    ImageView img4 = buttonCreater.createRandomButton();
-                    relativeLayout.addView(img4);
-                    break;
-                case 5:
-                    playSound5.start();
-                    ImageView img5 = buttonCreater.createRandomButton();
-                    relativeLayout.addView(img5);
-                    break;
+            if(frenqueShake == 20){
+                generateShake();
+                frenqueShake = 0;
+            }else {
+                frenqueShake++;
+                generateSoundAndButton();
             }
+
+
+
+            int rand;
 
             rand = randomFreq.nextInt(max -min)+min;
             mHandler.postDelayed(this,rand);
         }
     };
+
+    private void generateShake() {
+    }
+
+    private void generateSoundAndButton() {
+        Random randomNumber = new Random();
+        int rand = randomNumber.nextInt(5);
+
+        switch (rand) {
+            case 1:
+                playSound1.start();
+                ImageView img = buttonCreater.createRandomButton();
+                relativeLayout.addView(img);
+                break;
+            case 2:
+                playSound2.start();
+                ImageView img2 = buttonCreater.createRandomButton();
+                relativeLayout.addView(img2);
+                break;
+            case 3:
+                playSound3.start();
+                ImageView img3 = buttonCreater.createRandomButton();
+                relativeLayout.addView(img3);
+                break;
+            case 4:
+                playSound4.start();
+                ImageView img4 = buttonCreater.createRandomButton();
+                relativeLayout.addView(img4);
+                break;
+            case 5:
+                playSound5.start();
+                ImageView img5 = buttonCreater.createRandomButton();
+                relativeLayout.addView(img5);
+                break;
+        }
+    }
 }
