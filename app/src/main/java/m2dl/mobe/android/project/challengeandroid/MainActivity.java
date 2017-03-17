@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private Handler mHandler;
     private CreateImage buttonCreater;
 
-    public MediaPlayer playSound1,playSound2,playSound3,playSound4,playSound5;
+    public MediaPlayer playSound1,playSound2,playSound3,playSound4,playSound5,airHorn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         playSound3 = MediaPlayer.create(this, R.raw.sound3);
         playSound4 = MediaPlayer.create(this, R.raw.sound4);
         playSound5 = MediaPlayer.create(this, R.raw.sound5);
+        airHorn = MediaPlayer.create(this, R.raw.hornsound);
 
 
     }
