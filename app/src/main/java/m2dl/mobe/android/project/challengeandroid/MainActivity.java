@@ -2,14 +2,21 @@ package m2dl.mobe.android.project.challengeandroid;
 
 import android.media.MediaPlayer;
 import android.os.Handler;
+
+import android.animation.ObjectAnimator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
+
 import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final long DEFAULT_ANIMATION_DURATION = 2500L;
+    private float mScreenHeight;
 
     private Random randomFreq;
     int max = 300;
@@ -22,6 +29,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+    }
+
+    private void onStartAnimation(ImageView img){
+
+        ObjectAnimator rotationAnimator = ObjectAnimator.ofFloat(img, "rotation", 0, 180f);
+        rotationAnimator.setDuration(DEFAULT_ANIMATION_DURATION);
+        rotationAnimator.start();
 
         playSound1 = MediaPlayer.create(this, R.raw.sound1);
         playSound2 = MediaPlayer.create(this, R.raw.sound2);
@@ -93,5 +108,5 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-   
+
 }

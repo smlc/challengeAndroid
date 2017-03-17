@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ChallengeAndroid</string>
+    <string name="radio_song1">Song 1</string>
+    <string name="radio_song2">Song 2</string>
+    <string name="radio_level1">Level 1</string>
+    <string name="radio_level2">Level 2</string>
 </resources>
