@@ -5,19 +5,21 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import java.util.Random;
 
 import m2dl.mobe.android.project.challengeandroid.CreateImage;
+import m2dl.mobe.android.project.challengeandroid.Domain.Score;
 import m2dl.mobe.android.project.challengeandroid.R;
 
 /**
  * Created by rottanaly on 3/17/17.
  */
 
-public class PlayMusicActivity extends AppCompatActivity {
+public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
     private MediaPlayer mediaPlayer;
     private int songNb = 1;
     private static final long DEFAULT_ANIMATION_DURATION = 2500L;
@@ -32,6 +34,13 @@ public class PlayMusicActivity extends AppCompatActivity {
     private RelativeLayout relativeLayout;
     public MediaPlayer playSound1,playSound2,playSound3,playSound4,playSound5;
     private  int frenqueShake = 0;
+    private ImageView img;
+    private ImageView img2;
+    private ImageView img3;
+    private ImageView img4, img5;
+    private int currentScore = 0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +91,11 @@ public class PlayMusicActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         mediaPlayer.stop();
+        playSound1.stop();
+        playSound2.stop();
+        playSound3.stop();
+        playSound4.stop();
+        playSound5.stop();
     }
 
     private Runnable mUpdateTimeTask = new Runnable() {
@@ -116,29 +130,94 @@ public class PlayMusicActivity extends AppCompatActivity {
         switch (rand) {
             case 1:
                 playSound1.start();
-                ImageView img = buttonCreater.createRandomButton();
+
+                img = buttonCreater.createRandomButton();
+
+                playSound1.setOnCompletionListener(this);
+                img.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        v.setVisibility(View.INVISIBLE);
+                        currentScore++;
+                    }
+                });
                 relativeLayout.addView(img);
                 break;
             case 2:
                 playSound2.start();
-                ImageView img2 = buttonCreater.createRandomButton();
+                playSound2.setOnCompletionListener(this);
+
+                img2 = buttonCreater.createRandomButton();
+                img2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        v.setVisibility(View.INVISIBLE);
+                        currentScore++;
+                    }
+                });
                 relativeLayout.addView(img2);
                 break;
             case 3:
                 playSound3.start();
-                ImageView img3 = buttonCreater.createRandomButton();
+                playSound3.setOnCompletionListener(this);
+                img3 = buttonCreater.createRandomButton();
+                img3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        v.setVisibility(View.INVISIBLE);
+                        currentScore++;
+                    }
+                });
                 relativeLayout.addView(img3);
                 break;
             case 4:
                 playSound4.start();
-                ImageView img4 = buttonCreater.createRandomButton();
+                playSound4.setOnCompletionListener(this);
+                img4 = buttonCreater.createRandomButton();
+                img4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        v.setVisibility(View.INVISIBLE);
+                        currentScore++;
+                    }
+                });
                 relativeLayout.addView(img4);
                 break;
             case 5:
                 playSound5.start();
-                ImageView img5 = buttonCreater.createRandomButton();
+                playSound5.setOnCompletionListener(this);
+                img5 = buttonCreater.createRandomButton();
+                img5.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        v.setVisibility(View.INVISIBLE);
+                        currentScore++;
+                    }
+                });
                 relativeLayout.addView(img5);
                 break;
+        }
+    }
+
+
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+        if(mp.equals(playSound1)){
+            setToInvisible(img);
+        }else if(mp.equals(playSound2)){
+            setToInvisible(img2);
+        }else if(mp.equals(playSound3)){
+            setToInvisible(img3);
+        }else if(mp.equals(playSound4)){
+            setToInvisible(img4);
+        }else if(mp.equals(playSound5)){
+            setToInvisible(img5);
+        }
+    }
+
+    private void setToInvisible(ImageView img) {
+        if(img.getVisibility() == View.VISIBLE){
+            img.setVisibility(View.INVISIBLE);
         }
     }
 }
