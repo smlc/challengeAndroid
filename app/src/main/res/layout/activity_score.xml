@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="m2dl.mobe.android.project.challengeandroid.Activity.ScoreActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:text="Top Scores"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:id="@+id/tvTopScore"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textSize="24sp"
+            android:textStyle="normal|bold"
+            android:layout_height="150dp"
+            android:fontFamily="casual" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:id="@+id/tvScore1"
+            android:gravity="center"
+            android:layout_height="50dp"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textSize="18sp" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:id="@+id/tvScore2"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textSize="18sp" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:id="@+id/tvScore3"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textSize="18sp" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:id="@+id/tvScore4"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textSize="18sp" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:id="@+id/tvScore5"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textSize="18sp" />
+
+        <Button
+            android:text="Back"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="100dp"
+            android:id="@+id/buttonBack"
+            android:textAppearance="@android:style/TextAppearance"
+            android:fontFamily="casual"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            style="@android:style/Widget.Button"
+            android:textStyle="normal|bold" />
+
+    </LinearLayout>
+
+</RelativeLayout>
