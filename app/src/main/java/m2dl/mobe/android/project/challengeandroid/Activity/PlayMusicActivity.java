@@ -1,6 +1,7 @@
 package m2dl.mobe.android.project.challengeandroid.Activity;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.Random;
 
@@ -20,26 +22,27 @@ import m2dl.mobe.android.project.challengeandroid.R;
  */
 
 public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
+    private static final int MAX_SCORE = 30 ;
     private MediaPlayer mediaPlayer;
     private int songNb = 1;
     private static final long DEFAULT_ANIMATION_DURATION = 2500L;
     private float mScreenHeight;
-
+    public static Score score = new Score();
     private Random randomFreq;
-    int max = 300;
-    int min = 100;
+    int max = 800;
+    int min = 500;
     int rand;
     private Handler mHandler;
     private CreateImage buttonCreater;
     private RelativeLayout relativeLayout;
-    public MediaPlayer playSound1,playSound2,playSound3,playSound4,playSound5;
+    public MediaPlayer playSound1,playSound2,playSound3,playSound4,playSound5,airHorn;
     private  int frenqueShake = 0;
     private ImageView img;
     private ImageView img2;
     private ImageView img3;
     private ImageView img4, img5;
-    private int currentScore = 0;
-
+    private int currentScore = 20;
+    private TextView scoreView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +51,7 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
         Bundle extras = getIntent().getExtras();
         relativeLayout = (RelativeLayout) findViewById(R.id.gameRelativeLayout);
         buttonCreater = new CreateImage(this, relativeLayout);
-
+        scoreView = (TextView) findViewById(R.id.tvGameScore);
         initPlayer();
 
 
@@ -67,7 +70,9 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
         } else {
             mediaPlayer = MediaPlayer.create(this, R.raw.song1);
         }
+
         mediaPlayer.start();
+
     }
 
     private void initPlayer() {
@@ -76,6 +81,7 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
         playSound3 = MediaPlayer.create(this, R.raw.sound3);
         playSound4 = MediaPlayer.create(this, R.raw.sound4);
         playSound5 = MediaPlayer.create(this, R.raw.sound5);
+        airHorn = MediaPlayer.create(this, R.raw.hornsound);
     }
 
     private void onStartAnimation(ImageView img){
@@ -96,6 +102,7 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
         playSound3.stop();
         playSound4.stop();
         playSound5.stop();
+        airHorn.stop();
     }
 
     private Runnable mUpdateTimeTask = new Runnable() {
@@ -121,6 +128,8 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
     };
 
     private void generateShake() {
+
+
     }
 
     private void generateSoundAndButton() {
@@ -139,6 +148,7 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
                     public void onClick(View v) {
                         v.setVisibility(View.INVISIBLE);
                         currentScore++;
+                        updateScore();
                     }
                 });
                 relativeLayout.addView(img);
@@ -153,6 +163,7 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
                     public void onClick(View v) {
                         v.setVisibility(View.INVISIBLE);
                         currentScore++;
+                        updateScore();
                     }
                 });
                 relativeLayout.addView(img2);
@@ -166,6 +177,8 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
                     public void onClick(View v) {
                         v.setVisibility(View.INVISIBLE);
                         currentScore++;
+                        updateScore();
+
                     }
                 });
                 relativeLayout.addView(img3);
@@ -179,6 +192,7 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
                     public void onClick(View v) {
                         v.setVisibility(View.INVISIBLE);
                         currentScore++;
+                        updateScore();
                     }
                 });
                 relativeLayout.addView(img4);
@@ -192,10 +206,23 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
                     public void onClick(View v) {
                         v.setVisibility(View.INVISIBLE);
                         currentScore++;
+                        updateScore();
                     }
                 });
                 relativeLayout.addView(img5);
                 break;
+        }
+
+
+    }
+
+    private void updateScore() {
+        scoreView.setText(""+currentScore);
+        if(currentScore == MAX_SCORE){
+            score.addPoint(currentScore);
+            Intent intent = new Intent(this, ScoreActivity.class);
+            intent.putExtra("START_SCORE", currentScore);
+            startActivity(intent);
         }
     }
 
@@ -218,6 +245,15 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
     private void setToInvisible(ImageView img) {
         if(img.getVisibility() == View.VISIBLE){
             img.setVisibility(View.INVISIBLE);
+            airHorn.start();
+            if(currentScore == 0){
+                score.addPoint(currentScore);
+                Intent intent = new Intent(this, ScoreActivity.class);
+                intent.putExtra("START_SCORE", currentScore);
+                startActivity(intent);
+            }
+            currentScore--;
+            scoreView.setText(""+currentScore);
         }
     }
 }

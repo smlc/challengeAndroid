@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import m2dl.mobe.android.project.challengeandroid.Domain.Score;
 import m2dl.mobe.android.project.challengeandroid.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonStart;
     private Button buttonScore;
     private LinearLayout linearLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

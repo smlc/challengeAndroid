@@ -18,7 +18,7 @@ public class ScoreActivity extends AppCompatActivity {
 
     private Button buttonBack;
     private TextView tvScore1, tvScore2, tvScore3, tvScore4, tvScore5;
-    private Score score = MainActivity.score;
+    private Score score = PlayMusicActivity.score;
     private int[] topScores = new int[5];
 
     @Override
@@ -33,6 +33,8 @@ public class ScoreActivity extends AppCompatActivity {
         tvScore5 = (TextView) findViewById(R.id.tvScore5);
 
         score.sortList(score.getList());
+
+
         for (int i=0; i<5; i++) {
             int p = 0;
             if (i < score.getList().size()) {
