@@ -1,7 +1,10 @@
 package m2dl.mobe.android.project.challengeandroid.Activity;
 
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,6 +19,7 @@ import java.util.Random;
 import m2dl.mobe.android.project.challengeandroid.CreateImage;
 import m2dl.mobe.android.project.challengeandroid.Domain.Score;
 import m2dl.mobe.android.project.challengeandroid.R;
+import m2dl.mobe.android.project.challengeandroid.ShakeDetector;
 
 /**
  * Created by rottanaly on 3/17/17.
@@ -43,6 +47,10 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
     private ImageView img4, img5;
     private int currentScore = 20;
     private TextView scoreView;
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
+    private ShakeDetector mShakeDetector;
+    private TextView tvShake;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +60,23 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
         relativeLayout = (RelativeLayout) findViewById(R.id.gameRelativeLayout);
         buttonCreater = new CreateImage(this, relativeLayout);
         scoreView = (TextView) findViewById(R.id.tvGameScore);
+        tvShake = (TextView) findViewById(R.id.tvShake);
         initPlayer();
 
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager
+                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetector = new ShakeDetector();
+        mShakeDetector.setOnShakeListener(new ShakeDetector.OnShakeListener() {
+
+            @Override
+            public void onShake(int count) {
+                tvShake.setText("");
+                currentScore =+ 5;
+                System.out.println(count);
+            }
+        });
 
         randomFreq = new Random();
         rand = randomFreq.nextInt(max -min + 1)+min;
@@ -94,7 +117,16 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        // Add the following line to register the Session Manager Listener onResume
+        mSensorManager.registerListener(mShakeDetector, mAccelerometer,	SensorManager.SENSOR_DELAY_UI);
+    }
+
+
+    @Override
     protected void onPause() {
+        mSensorManager.unregisterListener(mShakeDetector);
         super.onPause();
         mediaPlayer.stop();
         playSound1.stop();
@@ -110,8 +142,8 @@ public class PlayMusicActivity extends AppCompatActivity implements MediaPlayer.
         @Override
         public void run() {
 
-            if(frenqueShake == 20){
-                generateShake();
+            if(frenqueShake == 10){
+               tvShake.setText("SHAKE IT !!!!!");
                 frenqueShake = 0;
             }else {
                 frenqueShake++;

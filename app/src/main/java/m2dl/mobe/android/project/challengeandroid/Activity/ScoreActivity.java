@@ -20,7 +20,7 @@ public class ScoreActivity extends AppCompatActivity {
     private TextView tvScore1, tvScore2, tvScore3, tvScore4, tvScore5;
     private Score score = PlayMusicActivity.score;
     private int[] topScores = new int[5];
-
+    private TextView urScore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
