@@ -22,6 +22,12 @@
             android:fontFamily="casual" />
 
         <TextView
+            android:id="@+id/votreScore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
             android:text="TextView"
             android:layout_width="match_parent"
             android:id="@+id/tvScore1"

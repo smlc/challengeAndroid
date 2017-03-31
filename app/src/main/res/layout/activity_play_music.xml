@@ -12,4 +12,14 @@
         android:layout_height="20dp"
         android:id="@+id/tvGameScore"
         android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvShake"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tvGameScore"
+        android:layout_marginLeft="76dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="148dp"
+        android:layout_toRightOf="@+id/tvGameScore" />
 </RelativeLayout>
